@@ -75,15 +75,14 @@ COPY entrypoint.sh /usr/local/tomcat/tmp
 
 RUN apt-get update \
     && apt-get -y upgrade \
-    && apt-get install -y python python-pip python-dev \
+    && apt-get install -y python python-pip python-dev fonts-thai-tlwg-ttf \
     && chmod +x /usr/local/tomcat/tmp/set_geoserver_auth.sh \
     && chmod +x /usr/local/tomcat/tmp/setup_auth.sh \
     && chmod +x /usr/local/tomcat/tmp/entrypoint.sh \
     && pip install pip==9.0.3 \
     && pip install -r requirements.txt \
     && chmod +x /usr/local/tomcat/tmp/get_dockerhost_ip.py \
-    && chmod +x /usr/local/tomcat/tmp/get_nginxhost_ip.py \
-    && apt-get install -y fonts-thai-tlwg-ttf
+    && chmod +x /usr/local/tomcat/tmp/get_nginxhost_ip.py
 
 ENV JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize=512m -XX:PermSize=256m -Xms512m -Xmx2048m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8 -Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=false -DGEOSERVER_CSRF_DISABLED=true -DPRINT_BASE_URL=http://geoserver:8080/geoserver/pdf"
 
